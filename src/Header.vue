@@ -244,4 +244,7 @@
         font-weight: 400;
         src:url(./assets/fonts/PictosCompleteXXI-Regular.woff) format("woff")
     }
+    .plugin-helios-header-footer {
+        position: relative;
+    }
 </style>
