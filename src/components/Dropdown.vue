@@ -1,36 +1,60 @@
 <template>
-    <li :class="{'expand-box' : !item.url}">
-        <a @click="toggleDropdown" :href="item.url ? item.url : '#'" :class="['dropdown', 'ico--text', {'is-active' : dropdownActive}]" :data-phf-ico-after="item.url ? '' : item.icon" data-phf-ico-active-after="" title="Nova vozila" target="_self">
-            <span>{{item.title}}</span>
-        </a>
-        
-        <div v-if="itemIndex === 0 && item != 0" :class="['expand-container', {'is-active' : dropdownActive}]">
+    <div v-if="dropdownActiveType !== null">
+        <div v-if="itemIndex === 0 && !item.url && item != 0 && dropdownActiveType === 0" :class="['expand-container', {'is-active' : dropdownActive}]">
             <div class="expand grid-row">
-                <div class="sub-nav sub-nav--expandable ">
+                <div class="sub-nav sub-nav_vehicles">
                     <ul>
-
-                        <li v-for="(carCategory, carIndex) in item.children" :key="carIndex">
-                             <a @click="toggleCarCategory(carIndex)" class="sub-nav_link-expandable" data-popup="595468798" data-phf-ico-after="" href="#" target="_self" :title="carCategory.title"><span>{{carCategory.title}}</span></a>
-                        </li>
-                        
+                    <li v-for="(dropdownLink, dropdownLinkIndex) in item.children" :key="dropdownLinkIndex">
+                        <a @click="toggleCarCategory(dropdownLinkIndex)" :class="['sub-nav_link', dropdownLinkIndex === vehicleDropdownActive ? 'active' : '']" href="#" target="_self" title="Renault SELECTION">
+                        <span>{{dropdownLink.title}}</span>
+                        </a>
+                    </li>
                     </ul>
+                    <div :class="['vehicle-list', dropdownLinkItemIndex === vehicleDropdownActive ? 'active' : '']" v-for="(dropdownLinkItem, dropdownLinkItemIndex) in item.children" :key="dropdownLinkItemIndex">
+                        <div class="sub-nav_image_container_vehicle" v-for="(childItem, childIndex) in dropdownLinkItem.children" :key="childIndex">
+                            <a :href="childItem.url">
+                                <img v-if="childItem.icon" :src="childItem.icon" :alt="childItem.title">
+                                <span>{{ childItem.title }}</span>
+                            </a>
+                        </div>
+                        <div class="sub-nav_image_container_vehicle last-link">
+                            <a :href="dropdownLinkItem.url">
+                                <div class="yellow-cube-container">
+                                    <span class="yellow-cube"></span>
+                                    <span class="yellow-cube-plus">+</span>
+                                </div>
+                                <span>{{ dropdownLinkItem.title }}</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
                                         
-        <div v-if="itemIndex !== 0 && !item.url && item != 0" :class="['expand-container', {'is-active' : dropdownActive}]">
+        <div v-if="itemIndex !== 0 && !item.url && item != 0 && itemIndex === dropdownActiveType" :class="['expand-container', {'is-active' : dropdownActive}]">
             <div class="expand grid-row">
                 <div class="sub-nav  ">
                     <ul>
                         <li v-for="(dropdownLink, dropdownLinkIndex) in item.children" :key="dropdownLinkIndex">
                             <a class="sub-nav_link" :href="dropdownLink.url" target="_self" title="Renault SELECTION"><span>{{dropdownLink.title}}</span></a>
+                            <ul class="sub-nav_children">
+                                <li class="sub-nav_children-item" v-for="(dropdownLinkChild, dropdownLinkChildIndex) in item.children[dropdownLinkIndex].children" :key="dropdownLinkChildIndex">
+                                    <a class="sub-nav_link_children" :href="dropdownLinkChild.url" :target="dropdownLinkChild.target != null ? dropdownLinkChild.target : '_self'" :title="dropdownLinkChild.title"><span>{{ dropdownLinkChild.title }}</span></a>
+                                </li>
+                            </ul>
+                            <div class="sub-nav_image_container">
+                                <img v-if="dropdownLink.meta.image" :src="dropdownLink.meta.image" :alt="dropdownLink.title">
+                            </div>
                         </li>                        
                     </ul>
                 </div>
             </div>
         </div>
-        
-    </li>
+    </div>
+
 </template>
 
 <script>
@@ -40,12 +64,14 @@
 
         props: {
             item: Object,
-            itemIndex: Number
+            itemIndex: Number,
+            dropdownActiveType: Number
         },
 
         data(){
             return {
-                dropdownActive: false
+                dropdownActive: false,
+                vehicleDropdownActive: 0
             }
         },
         created() {
@@ -56,14 +82,7 @@
         },
         methods: {
             toggleCarCategory(index){
-                this.$emit("showModal", index)
-            },
-            closeDropdown(){
-                this.dropdownActive = false;
-            },
-            toggleDropdown(){
-                this.dropdownActive = !this.dropdownActive
-                this.$emit("showModal", null)
+                this.vehicleDropdownActive = index;
             },
             close(e) {
                 if(! this.$el.contains(e.target)){

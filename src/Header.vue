@@ -8,6 +8,9 @@
                     
                     <li v-for="(topMenuItem, topMenuIndex) in topNavigation" :key="topMenuIndex" class="padding-left-5">
                         <a :data-tracking-name="topNavIndexClass" data-tracking-location="Menu top navigation" class=" gtm-button " :href="topMenuItem.url" title="" target="_self" rel="nofollow noreferrer">
+                            <span v-if="topMenuItem.icon === 'icon-search'" class="search-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="16" height="16" fill="#fff" class="e11fteez1 header-1n0oa5t e3bhxjg0"><path d="M13.07 6.26c-3.69 0-6.81 2.73-6.81 6.691 0 4.02 3.15 7.05 6.93 7.05 3.721 0 6.811-2.76 6.811-6.69 0-4.05-3.12-7.05-6.93-7.05m8.19 7.02c0 2.01-.69 3.75-1.83 5.13l5.85 5.851-.87.9-5.88-5.88c-1.44 1.26-3.33 1.98-5.37 1.98C8.72 21.262 5 17.66 5 12.98 5 8.361 8.72 5 13.1 5c4.53 0 8.16 3.511 8.16 8.281"></path></svg>
+                            </span>
                             <span><span v-if="topMenuItem.meta.bold" :style="topMenuItem.meta.yellow ? 'color: #000 !important; background-color: #efdf00;' : ''"><b>{{ topMenuItem.title }}</b></span><span v-else :style="topMenuItem.meta.yellow ? 'color: #000 !important; background-color: #efdf00;' : ''">{{ topMenuItem.title }}</span></span>
                         </a>
                     </li>
@@ -26,7 +29,7 @@
                             </div>
 
                             <div class="header-part menu-trigger ico-before-menu" @click="toggleMobileDropdown">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20"><defs><filter id="a"><feColorMatrix in="SourceGraphic" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"/></filter></defs><g filter="url(#a)" transform="translate(-280 -20)"><g transform="translate(280 20)"><rect width="24" height="2" rx="1"/><rect width="16" height="2" y="9" rx="1"/><rect width="20" height="2" y="18" rx="1"/></g></g></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="20" height="20" fill="#fff"><path d="M28.75 2.5H1.25a1.25 1.25 0 0 0 0 2.5h27.5a1.25 1.25 0 0 0 0-2.5zM1.25 16.25h17.5a1.25 1.25 0 0 0 0-2.5H1.25a1.25 1.25 0 0 0 0 2.5zM23.75 25H1.25a1.25 1.25 0 0 0 0 2.5h22.5a1.25 1.25 0 0 0 0-2.5z"></path></svg>
                             </div>
                             
 
@@ -37,52 +40,53 @@
                                     <li class="visible-xs visible-sm">
                                         <a class="header-icon header-icon-home" :href="basicInformation.site_url"><span>Renault</span></a>
                                     </li>
-                                    <Dropdown 
+                                    <DropdownLink 
                                         v-for="(navigationItem, itemIndex) in mainNavigation" 
                                         :key="itemIndex" 
                                         :item="navigationItem"
                                         :itemIndex="itemIndex"
-                                         @showModal="toggleCarCategory"
-                                        />
-                                    
+                                        :isActive="dropdownActive === itemIndex"
+                                        @toggleDropdown="toggleDropdown"
+                                    />
                                 </ul>
                             </nav>
                 
                         </header>
 
-            
-                        <nav :class="['mobile-menu', { 'is-active' : mobileDropdown}]" :style="mobileDropdown ? 'display: block;' : 'display: none;'">
-                            <div class="close-button menu-trigger" @click="toggleMobileDropdown" data-phf-ico-active-after=""></div>
-                
-                                <ul class="main-navigation">
-                                    <li class="visible-xs visible-sm">
-                                        <a class="header-icon header-icon-home" :href="basicInformation.site_url"><span>Renault</span></a>
-                                    </li>
-                                    
-                                    <Dropdown 
-                                        v-for="(navigationItem, itemIndex) in mainNavigation" 
-                                        :key="itemIndex" 
-                                        :item="navigationItem"
-                                        :itemIndex="itemIndex"
-                                         @showModal="toggleCarCategory"
-                                        />
-                                    
-                                </ul>
-            
-                                <div class="navigation-top-mobile">
-                    
-                                    <ul class="module-container">
-                                        
-                                        <li v-for="(topMenuItem, topMenuIndex) in topNavigation" :key="topMenuIndex" class="padding-left-5">
+                        <nav  :class="['mobile-menu', { 'is-active' : mobileDropdown}]" :style="mobileDropdown ? 'display: flex;' : 'display: none;'">
+                            <div class="close-button-container">
+                                <div class="close-button menu-trigger" @click="toggleMobileDropdown" data-phf-ico-active-after=""></div>
+                            </div>
+                            <div class="mobile-menu-container">
+                                <div class="mobile-menu-heading">
+                                    <span>{{ basicInformation.site_title }}</span>
+                                </div>
+                                <div>
+                                    <MobileDropdown 
+                                        :navigation="mainNavigation"
+                                    />
+                                </div>
+                                <div class="mobile-menu-search">
+                                    <a href="https://www.renault.hr/searchResult.html">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="16" height="16" fill="#fff" class="e11fteez1 header-1n0oa5t e3bhxjg0"><path d="M13.07 6.26c-3.69 0-6.81 2.73-6.81 6.691 0 4.02 3.15 7.05 6.93 7.05 3.721 0 6.811-2.76 6.811-6.69 0-4.05-3.12-7.05-6.93-7.05m8.19 7.02c0 2.01-.69 3.75-1.83 5.13l5.85 5.851-.87.9-5.88-5.88c-1.44 1.26-3.33 1.98-5.37 1.98C8.72 21.262 5 17.66 5 12.98 5 8.361 8.72 5 13.1 5c4.53 0 8.16 3.511 8.16 8.281"></path></svg></span>
+                                        <span class="title">traži</span>
+                                    </a>
+                                </div>
+                                <div class="mobile-menu-bottom-links">
+                                    <ul>
+                                        <li v-for="(topMenuItem, topMenuIndex) in filteredTopNavigation" :key="topMenuIndex" class="padding-left-5">
                                             <a :data-tracking-name="topNavIndexClass" data-tracking-location="Menu top navigation" class=" gtm-button " :href="topMenuItem.url" title="" target="_self" rel="nofollow noreferrer">
-                                                <span><span>{{ topMenuItem.title }}</span></span>
+                                                <span v-if="topMenuItem.icon === 'icon-search'" class="search-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="16" height="16" fill="#fff" class="e11fteez1 header-1n0oa5t e3bhxjg0"><path d="M13.07 6.26c-3.69 0-6.81 2.73-6.81 6.691 0 4.02 3.15 7.05 6.93 7.05 3.721 0 6.811-2.76 6.811-6.69 0-4.05-3.12-7.05-6.93-7.05m8.19 7.02c0 2.01-.69 3.75-1.83 5.13l5.85 5.851-.87.9-5.88-5.88c-1.44 1.26-3.33 1.98-5.37 1.98C8.72 21.262 5 17.66 5 12.98 5 8.361 8.72 5 13.1 5c4.53 0 8.16 3.511 8.16 8.281"></path></svg>
+                                                </span>
+                                                <span><span v-if="topMenuItem.meta.bold" :style="topMenuItem.meta.yellow ? 'color: #000 !important; background-color: #efdf00;' : ''"><b>{{ topMenuItem.title }}</b></span><span v-else :style="topMenuItem.meta.yellow ? 'color: #000 !important; background-color: #efdf00;' : ''">{{ topMenuItem.title }}</span></span>
                                             </a>
                                         </li>
-                                      
                                     </ul>
                                 </div>
-                            </nav>
-                            <div class="nav-mask"></div>
+                            </div>
+                        </nav>
+                        <div class="nav-mask"></div>
             
                         </div>
 
@@ -114,6 +118,14 @@
                     </nav>
                 </div>
             </div>
+
+            <Dropdown 
+                v-for="(navigationItem, itemIndex) in mainNavigation" 
+                :key="itemIndex" 
+                :item="navigationItem"
+                :itemIndex="itemIndex"
+                :dropdownActiveType="dropdownActive"
+            />
         </div>
 
 </template>
@@ -121,9 +133,11 @@
 <script>
     import axios from 'axios';
     import Dropdown from "@/components/Dropdown";
+    import DropdownLink from "@/components/DropdownLink"
+    import MobileDropdown from "@/components/MobileDropdown"
 
     export default {
-        components: { Dropdown },
+        components: { Dropdown, DropdownLink, MobileDropdown },
         name: 'Header',
         created() {
             if ("HEADER_FOOTER_SETTINGS" in window) {
@@ -144,7 +158,8 @@
                 activeCarCategory: null,
                 basicInformation: [],
                 topNavigation: [],                 
-                mainNavigation: []
+                mainNavigation: [],
+                dropdownActive: null
             }
         },
         beforeDestroy() {
@@ -158,9 +173,17 @@
             
             mainNavFirst() {
                 return  this.mainNavigation && this.mainNavigation[0] && this.mainNavigation[0].children;
+            },
+
+            filteredTopNavigation() {
+                return this.topNavigation.slice(0, -1);
             }
         },
         methods: {
+            toggleDropdown(index) {
+                this.dropdownActive = this.dropdownActive === index ? null : index;
+            },
+
             fetchNavigation(apiUri) {
                 axios.get(apiUri)
                     .then((response) => {
@@ -172,23 +195,6 @@
             toggleMobileDropdown(){
                 this.mobileDropdown = !this.mobileDropdown
             },
-            toggleCarCategory(index){
-                console.log(index);
-                if(this.activeCarCategory === index) {
-                    this.activeCarCategory = null
-                } else {
-                    this.activeCarCategory = index
-                }
-                if(index === null) {
-                    this.activeCarCategory = null
-                }
-                
-            },
-            del(e) {
-                if(! this.$el.contains(e.target)){
-                    this.mobileDropdown = false
-                }
-            }
         }
     }
 </script>
