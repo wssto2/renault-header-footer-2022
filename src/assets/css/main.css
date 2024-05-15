@@ -3754,6 +3754,12 @@ body.no-scrollbar {
     max-width: 100%;
     margin: 0 auto;
 }
+.plugin-helios-header-footer .module-container .footer-border-container {
+    width: 100%;
+    height: 32px;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(119, 119, 119);
+}
 .plugin-helios-header-footer .module-container.module-container--used-cars {
     max-width: 1054px;
 }
@@ -5693,7 +5699,7 @@ body.no-scrollbar {
 }
 @media (min-width: 580px) {
     .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-menu .menu-group-name {
-        padding-bottom: 0;
+        padding-bottom: 16px;
     }
 }
 @media (max-width: 579px) {
@@ -5807,7 +5813,7 @@ body.no-scrollbar {
 }
 @media (min-width: 580px) {
     .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-links {
-        padding: 0 15px;
+        padding: 0 64px;
     }
 }
 @media (min-width: 1024px) {
@@ -20478,24 +20484,36 @@ p.wysiwyg-block--content-zone {
    }
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list img {
-      
-   }
+    width: 100%;
+    max-width: 320px;
+    min-height: 105px;
+    object-fit: contain;
+}
+
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list.active {
       display: flex;
+      padding-right: 25px;
+      padding-top: 0;
+      margin-top: 16px;
+      padding-left: 8px;
    }
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle {
-      display: flex;
-      flex-direction: column;
-      max-width: 280px;
-      margin-right: 14px;
-      margin-bottom: 20px;
-   }
+    display: flex;
+    flex-direction: column;
+    max-width: 20%;
+    margin-bottom: 0;
+    flex-basis: auto;
+    min-height: 220px;
+    padding-left: 0;
+    padding-right: 16px;
+    width: 20%;
+}
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle a {
       text-decoration: none;
-
+      text-align: left;
    }
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle a:hover {
@@ -20509,6 +20527,8 @@ p.wysiwyg-block--content-zone {
       text-align: left;
       display: block;
       width: 100%;
+      margin-top: 7px;
+      margin-left: 8px;
    }
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle .yellow-cube-container {
@@ -20520,11 +20540,12 @@ p.wysiwyg-block--content-zone {
 
    .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle.last-link {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
-      margin-top: 50px;
-      width: 25%;
+      margin-bottom: 0;
+      margin-top: 0;
+      width: 20%;
+      height: auto;
     }
 
     .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle.last-link:hover span:last-of-type {
@@ -20536,7 +20557,7 @@ p.wysiwyg-block--content-zone {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      transform: translateY(-10%);
     }
 
     .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle.last-link span:last-of-type {
@@ -20548,10 +20569,10 @@ p.wysiwyg-block--content-zone {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 35px;
-      height: 35px;
+      width: 32px;
+      height: 32px;
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
   }
   
   .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle .yellow-cube-container .yellow-cube {
@@ -20560,6 +20581,7 @@ p.wysiwyg-block--content-zone {
       height: 100%;
       transition: transform 0.35s ease-in-out 0s;
       transform: rotate(45deg);
+      margin: 0;
   }
   
   .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle .yellow-cube-container .yellow-cube-plus {
@@ -20571,6 +20593,7 @@ p.wysiwyg-block--content-zone {
       color: #000 !important;
       text-transform: normal;
       text-align: center;
+      margin: 0;
   }
   
   .expand-container .expand .sub-nav.sub-nav_vehicles .vehicle-list .sub-nav_image_container_vehicle.last-link:hover .yellow-cube {
