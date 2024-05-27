@@ -5529,6 +5529,9 @@ body.no-scrollbar {
     .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-menu {
         display: block !important;
     }
+    .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-menu:first-child {
+        padding: 25px 15px 15px 15px;
+    }
 }
 @media (min-width: 1024px) {
     .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-menu {
@@ -5537,7 +5540,7 @@ body.no-scrollbar {
         padding-top: 5px;
     }
     .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-menu.row {
-        padding: 0 15px;
+        padding: 0 15px 40px 15px;
     }
 }
 .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-menu li {
