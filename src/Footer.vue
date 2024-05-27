@@ -23,8 +23,10 @@
                                     <div class="menu-group-name">{{socialNavigation[0].title}}</div>
                                     <div class="social-links">
                                         
-                                        <a v-for="(social, socialIndex) in socialNavigation[0].children" :key="socialIndex" :href="social.url" :data-phf-ico-before="social.icon" :title="social.title" target="_blank" class="ico-before" rel="nofollow"></a>
-                                        
+                                        <a v-for="(social, socialIndex) in socialNavigation[0].children" :key="socialIndex" :href="social.url" :title="social.title" target="_blank" class="ico-before" rel="nofollow">
+                                            <span style="transform: rotate(180deg)" v-html="social.icon">
+                                            </span>
+                                        </a>
                                     </div>
                                 </li>
                                 

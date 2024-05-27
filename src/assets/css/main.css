@@ -6393,6 +6393,9 @@ body.no-scrollbar {
     vertical-align: middle;
     text-transform: none;
 }
+.plugin-helios-header-footer .helios-special-elements .social-links svg {
+    transform: scale(1, -1);
+}
 .plugin-helios-header-footer .helios-special-elements [data-phf-ico-before]:before {
     content: attr(data-phf-ico-before);
 }
