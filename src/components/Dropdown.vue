@@ -38,17 +38,31 @@
             <div class="expand grid-row">
                 <div class="sub-nav  ">
                     <ul>
-                        <li v-for="(dropdownLink, dropdownLinkIndex) in item.children" :key="dropdownLinkIndex">
-                            <a class="sub-nav_link" :href="dropdownLink.url" target="_self" title="Renault SELECTION"><span>{{dropdownLink.title}}</span></a>
+                        <li v-for="(dropdownLink, dropdownLinkIndex) in item.children" :key="dropdownLinkIndex" :class="['sub-nav-item', { 'has-image': dropdownLink.meta.image }]">
+
+                            <!-- Main List Item Content -->
+                            <a class="sub-nav_link" :href="dropdownLink.url" target="_self" :title="dropdownLink.title">
+                                <span>{{ dropdownLink.title }}</span>
+                            </a>
+                            
+                            <!-- Sub-navigation children -->
                             <ul class="sub-nav_children">
-                                <li class="sub-nav_children-item" v-for="(dropdownLinkChild, dropdownLinkChildIndex) in item.children[dropdownLinkIndex].children" :key="dropdownLinkChildIndex">
-                                    <a class="sub-nav_link_children" :href="dropdownLinkChild.url" :target="dropdownLinkChild.target != null ? dropdownLinkChild.target : '_self'" :title="dropdownLinkChild.title"><span>{{ dropdownLinkChild.title }}</span></a>
+                                <li
+                                    class="sub-nav_children-item"
+                                    v-for="(dropdownLinkChild, dropdownLinkChildIndex) in item.children[dropdownLinkIndex].children"
+                                    :key="dropdownLinkChildIndex"
+                                >
+                                    <a class="sub-nav_link_children" :href="dropdownLinkChild.url" :target="dropdownLinkChild.target != null ? dropdownLinkChild.target : '_self'" :title="dropdownLinkChild.title">
+                                        <span>{{ dropdownLinkChild.title }}</span>
+                                    </a>
                                 </li>
                             </ul>
+                            
+                            <!-- Image Container -->
                             <div class="sub-nav_image_container">
                                 <img v-if="dropdownLink.meta.image" :src="dropdownLink.meta.image" :alt="dropdownLink.title">
                             </div>
-                        </li>                        
+                        </li>
                     </ul>
                 </div>
             </div>
