@@ -34,7 +34,43 @@
                         </div>
                     </div>
                     <div class="bottom-menu">
-                        <div class="module-container row">
+                        <div class="module-container row" v-if="basicInformation && basicInformation.legal_navigation && basicInformation.legal_navigation.meta && basicInformation.legal_navigation.meta.two_column =='true'">
+                             <ul class="footer-links footer-options col-xs-12 col-md-6 " v-if="legalNavigation != 0">
+
+                                <li
+                                    v-for="(legalItem, legalItemIndex) in legalNavigation[0].children"
+                                    :key="legalItemIndex">
+
+                                    <a
+                                        :title="legalItem.title"
+                                        :href="legalItem.url">
+                                        <span>
+                                            {{ legalItem.title }}
+                                        </span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                            <ul class="footer-links footer-legal col-xs-12 col-md-6 ">
+
+                                <li
+                                    v-for="(legalItem, legalItemIndex) in legalNavigation[1].children"
+                                    :key="legalItemIndex">
+
+                                    <a
+                                        :title="legalItem.title"
+                                        :href="legalItem.url">
+                                        <span>
+                                            {{ legalItem.title }}
+                                        </span>
+                                    </a>
+                                </li>
+                                
+                                <li class="footer-legal_item"><span class="copyright" title="© Renault 2021">{{footer_trademark}}</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="module-container row" v-else>
                              <ul class="footer-links footer-options col-xs-12 col-md-6 " v-if="legalNavigation != 0">
 
                                 <li

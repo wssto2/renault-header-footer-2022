@@ -5830,12 +5830,12 @@ body.no-scrollbar {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        width: 70%;
+        width: 50%;
     }
     .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-links.footer-legal {
         float: right;
         padding-left: 0;
-        width: 30%;
+        width: 50%;
     }
 }
 .plugin-helios-header-footer .helios-special-elements#helios-footer .page-footer footer .footer-links li {
@@ -20455,6 +20455,7 @@ p.wysiwyg-block--content-zone {
    .expand-container .expand .sub-nav ul li img {
       cursor: pointer;
       transition: transform 0.35s ease-in-out 0s;
+      max-height: 166px;
   }
   
   .expand-container .expand .sub-nav ul li:hover img {

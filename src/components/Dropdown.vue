@@ -37,7 +37,7 @@
         <div v-if="itemIndex !== 0 && !item.url && item != 0 && itemIndex === dropdownActiveType" :class="['expand-container', {'is-active' : dropdownActive}]">
             <div class="expand grid-row">
                 <div class="sub-nav  ">
-                    <ul>
+                    <ul :style="{ flexDirection: item.meta.direction == 'column' ? 'column' : 'row' }">
                         <li v-for="(dropdownLink, dropdownLinkIndex) in item.children" :key="dropdownLinkIndex" :class="['sub-nav-item', { 'has-image': dropdownLink.meta.image }]">
 
                             <!-- Main List Item Content -->
