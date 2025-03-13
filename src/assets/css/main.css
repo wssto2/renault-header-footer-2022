@@ -4438,6 +4438,8 @@ body.no-scrollbar {
 
 .plugin-helios-header-footer .helios-special-elements#helios-header .mobile-menu .mobile-menu-container div.mobile-menu-search a span.title {
     margin-left: 10px;
+    font-family: NovuelR-Regular, sans-serif;
+    line-height: 22px;
 }
 
 .plugin-helios-header-footer .helios-special-elements#helios-header .mobile-menu .mobile-menu-container div.mobile-menu-search a span svg {
@@ -4463,6 +4465,7 @@ body.no-scrollbar {
 
 .plugin-helios-header-footer .helios-special-elements#helios-header .mobile-menu .mobile-menu-container .mobile-menu-heading span {
     color: #FFF;
+    font-family: NouvelR-Regular, sans-serif;
 }
 
 
