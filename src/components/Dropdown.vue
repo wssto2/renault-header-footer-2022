@@ -59,9 +59,9 @@
                             </ul>
                             
                             <!-- Image Container -->
-                            <div class="sub-nav_image_container">
+                            <a :href="dropdownLink.url" target="_self" :title="dropdownLink.title" class="sub-nav_image_container">
                                 <img v-if="dropdownLink.meta.image" :src="dropdownLink.meta.image" :alt="dropdownLink.title">
-                            </div>
+                            </a>
                         </li>
                     </ul>
                 </div>
