@@ -43,7 +43,8 @@
 
                                     <a
                                         :title="legalItem.title"
-                                        :href="legalItem.url">
+                                        :href="legalItem.url"
+                                        :target="legalItem.target ? legalItem.target : '_self'">
                                         <span>
                                             {{ legalItem.title }}
                                         </span>
@@ -79,7 +80,8 @@
 
                                     <a
                                         :title="legalItem.title"
-                                        :href="legalItem.url">
+                                        :href="legalItem.url"
+                                        :target="legalItem.target ? legalItem.target : '_self'">
                                         <span>
                                             {{ legalItem.title }}
                                         </span>
